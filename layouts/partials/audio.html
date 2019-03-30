@@ -1,17 +1,35 @@
-{{ with .Params.m4aURL }}
-    <a href={{ . }}>M4A audio</a>
+<div>
+    {{ if or (or (isset .Params "opusurl") (isset .Params "oggurl")) (or (isset .Params "mp3url") (isset .Params "m4aurl"))}}
+<audio controls>
+    {{ if .Params.opusURL }}
+    <source src="{{ .Params.opusURL }}" type="audio/ogg">
+    {{ else if .Params.oggURL }}
+    <source src="{{ .Params.oggURL }}" type="audio/ogg">
+    {{ else if .Params.mp3URL }}
+    <source src="{{ .Params.mp3URL }}" type="audio/mpeg">
+    {{ else if .Params.m4aURL }}
+    <source src="{{ .Params.m4aURL }}" type="audio/mpeg">
+    {{ end }}
+</audio>
 {{ end }}
+</div>
 
-{{ with .Params.mp3URL }}
-    <a href={{ . }}>MP3 audio</a>
+{{ with .Params.opusURL }}
+<a href={{ . }}>Opus audio</a>
+{{ else }}
+
 {{ end }}
 
 {{ with .Params.oggURL }}
-    <a href={{ . }}>OGG audio</a>
+<a href={{ . }}>OGG audio</a>
 {{ end }}
 
-{{ with .Params.opusURL }}
-    <a href={{ . }}>Opus audio</a>
+{{ with .Params.mp3URL }}
+<a href={{ . }}>MP3 audio</a>
+{{ end }}
+
+{{ with .Params.m4aURL }}
+    <a href={{ . }}>M4A audio</a>
 {{ end }}
 
 {{ with .Params.torrentFile }}
