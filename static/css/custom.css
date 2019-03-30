@@ -1,0 +1,26 @@
+.header {
+    padding: 5px 20px 5px 20px;
+    background-color: #24292e;
+    font-size: 150%;
+    margin-bottom: 50px;
+}
+
+.header a {
+    text-decoration: none;
+    color: white;
+    vertical-align: middle;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.header a:hover {
+    color: #a0a0a0;
+}
+
+a.brand {
+    font-size: 150%;
+}
+
+.audio-links {
+    font-size: 150%;
+}

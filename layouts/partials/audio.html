@@ -1,0 +1,19 @@
+{{ with .Params.m4aURL }}
+    <a href={{ . }}>M4A audio</a>
+{{ end }}
+
+{{ with .Params.mp3URL }}
+    <a href={{ . }}>MP3 audio</a>
+{{ end }}
+
+{{ with .Params.oggURL }}
+    <a href={{ . }}>OGG audio</a>
+{{ end }}
+
+{{ with .Params.opusURL }}
+    <a href={{ . }}>Opus audio</a>
+{{ end }}
+
+{{ with .Params.torrentFile }}
+<a href={{ . }}>Torrent</a>
+{{ end }}
