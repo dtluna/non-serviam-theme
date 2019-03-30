@@ -1,2 +1,18 @@
 <a class="brand" href="/">{{ .Site.Title }}</a>
 <a href="/index.xml">RSS</a>
+
+{{ with .Site.Params.patreon }}
+    <a href="{{ . }}">Patreon</a>
+{{ end }}
+
+{{ with .Site.Params.stitcher }}
+    <a href="{{ . }}">Stitcher</a>
+{{ end }}
+
+{{ with .Site.Params.soundcloud }}
+    <a href="{{ . }}">Soundcloud</a>
+{{ end }}
+
+{{ with .Site.Params.youtube }}
+    <a href="{{ . }}">YouTube</a>
+{{ end }}
