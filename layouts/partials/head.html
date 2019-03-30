@@ -1,0 +1,19 @@
+<head>
+    <meta charset="utf-8">
+
+    {{ partial "title.html" . }}
+
+    <!-- Include Skeleton CSS http://getskeleton.com -->
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/skeleton.css">
+
+    <!-- Non-Serviam-specific CSS -->
+    <link rel="stylesheet" href="/css/custom.css">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{ partial "favicon.html" . }}
+
+    {{ template "_internal/opengraph.html" . }}
+</head>
