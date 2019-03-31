@@ -1,9 +1,10 @@
 {{ define "main" }}
-<header>
-    <h1>{{ .Title }}</h1>
-    <h4>{{ .Site.Params.description }}</h4>
-</header>
-
+    <header>
+        <h1>{{ .Title }}</h1>
+        {{ with .Site.Params.description }}
+            <h4>{{ . }}</h4>
+        {{ end }}
+    </header>
 
     {{ partial "podcast-list.html" . }}
 {{ end }}
