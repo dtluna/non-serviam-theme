@@ -11,7 +11,7 @@ body {
     flex: 1 0 auto;
 }
 
-header {
+#index {
     margin-bottom: 50px;
 }
 
@@ -32,7 +32,6 @@ header {
 
 .header a:hover {
     color: #a0a0a0;
-    text-decoration: underline;
 }
 
 a.brand {
