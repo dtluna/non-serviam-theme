@@ -1,7 +1,13 @@
 {{ define "main" }}
-    <header>
-        <h1>{{ .Title }}</h1>
-    </header>
-    {{ partial "podcast-list.html" . }}
+<div class="container">
+    <div class="row">
+        <div class="column">
+            <header>
+                <h1>{{ .Title }}</h1>
+            </header>
+            {{ partial "podcast-list.html" . }}
+        </div>
+    </div>
+</div>
 {{ end }}
 

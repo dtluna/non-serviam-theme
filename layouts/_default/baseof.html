@@ -5,14 +5,7 @@
         <div class="header">
             {{- partial "header.html" . -}}
         </div>
-        <div class="container">
-            <div class="row">
-                <div class="column">
-                    {{- block "main" . }}{{- end }}
-                </div>
-            </div>
-        </div>
-
+        {{- block "main" . }}{{- end }}
         <footer>
             {{- partial "footer.html" . -}}
         </footer>

@@ -1,10 +1,20 @@
 {{ define "main" }}
-    <header id="index">
-        <h1>{{ .Title }}</h1>
-        {{ with .Site.Params.description }}
-            <h4>{{ . }}</h4>
-        {{ end }}
-    </header>
-
-    {{ partial "podcast-list.html" . }}
+<div class="container">
+    <div class="row" id="index">
+        <div class="one-half column">
+            <img class="u-max-full-width" src="/images/thumbnail.jpg" />
+        </div>
+        <div class="one-half column">
+            <h1>{{ .Title }}</h1>
+            {{ with .Site.Params.description }}
+            <h5 id="index-description">{{ . }}</h5>
+            {{ end }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="column">
+            {{ partial "podcast-list.html" . }}
+        </div>
+    </div>
+</div>
 {{ end }}
