@@ -1,16 +1,38 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+<rss version="2.0"
+     xmlns:atom="http://www.w3.org/2005/Atom"
+     xmlns:content="http://purl.org/rss/1.0/modules/content/"
+     xmlns:dc="http://purl.org/dc/elements/1.1/"
+     xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+>
     <channel>
         <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+
         <link>{{ .Permalink }}</link>
-        <description>Recent content {{ if ne  .Title  .Site.Title }}{{ with .Title }}in {{.}} {{ end }}{{ end }}on {{ .Site.Title }}</description>
+
+        {{ with $.Site.Params.description }}
+        <description>{{ . }}</description>
+        <itunes:subtitle>{{ . }}</itunes:subtitle>
+        {{ end }}
+
+
         <generator>Hugo — gohugo.io</generator>
         {{ with .Site.LanguageCode }} <language>{{.}}</language>{{end}}
 
         {{ with .Site.Author.email }}
+        <itunes:owner>
+            <itunes:email>{{ . }}</itunes:email>
+            {{ with $.Site.Params.podcast_name }}
+            <itunes:name>{{ . }}
+            {{ end }}
+        </itunes:owner>
         <managingEditor>{{.}}
             {{ with $.Site.Author.name }} ({{.}}){{end}}
         </managingEditor>
         {{end}}
+
+        {{ with $.Site.Author.name }}
+        <itunes:author>{{ . }}</itunes:author>
+        {{ end }}
 
         {{ with .Site.Author.email }}
         <webMaster>{{.}}
@@ -31,14 +53,21 @@
         {{ end }}
 
         {{ if $.Param "images" }}
-            <image>
-                <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
-                <link>{{ .Permalink }}</link>
-                {{ range first 6 ($.Param "images") }}
+            {{ range first 6 ($.Param "images") }}
+                <image>
+                    <title>{{ if eq  $.Title  $.Site.Title }}{{ $.Site.Title }}{{ else }}{{ with $.Title }}{{.}} on {{ end }}{{ $.Site.Title }}{{ end }}</title>
+                    <link>{{ $.Permalink }}</link>
                     <url>{{ . | absURL }}</url>
-                {{ end }}
-            </image>
+                </image>
+                <itunes:image href="{{ . | absURL }}" />
+            {{ end }}
         {{ end }}
+
+        {{ with $.Site.Params.category }}
+            <itunes:category text="{{ . | html }}" />
+        {{ end }}
+
+        <itunes:explicit>{{ if $.Site.Params.explicit }}yes{{ else }}no{{ end }}</itunes:explicit>
 
         {{ range .Pages }}
         <item>
@@ -48,14 +77,29 @@
             <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
             {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
             <guid>{{ .Permalink }}</guid>
-            <description>{{ .Summary | html }}</description>
+
+            {{ with .Summary }}
+                <itunes:summary>{{ . | html }}</itunes:summary>
+                <description>{{ . | html }}</description>
+            {{ end }}
+
             <content:encoded>{{ .Content | html }}</content:encoded>
-            {{ if ne .Site.Params.hide_author true }}
+            {{ if ne $.Site.Params.hide_author true }}
                 {{ with .Params.author }}
                     <dc:creator>{{ . }}</dc:creator>
+                    <itunes:author>{{ . }}</itunes:author>
                 {{ else }}
-                    <dc:creator>{{ $.Site.Author.name }}</dc:creator>
+                    {{ with $.Site.Author.name }}
+                        <dc:creator>{{ . }}</dc:creator>
+                        <itunes:author>{{ . }}</itunes:author>
+                    {{ end }}
                 {{ end }}
+            {{ end }}
+
+            {{ if or (eq .Params.explicit true) (eq $.Site.Params.explicit true) }}
+                <itunes:explicit>yes</itunes:explicit>
+            {{ else }}
+                <itunes:explicit>no</itunes:explicit>
             {{ end }}
 
             {{ if .Params.opusURL }}
