@@ -30,6 +30,17 @@
             {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
         {{ end }}
 
+        {{ if $.Param "images" }}
+            <image>
+                <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+                <link>{{ .Permalink }}</link>
+                {{ range first 6 ($.Param "images") }}
+                    <url>{{ . | absURL }}</url>
+                {{ end }}
+
+            </image>
+        {{ end }}
+
         {{ range .Pages }}
         <item>
             <title>{{ .Title }}</title>
