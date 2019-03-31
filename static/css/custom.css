@@ -12,7 +12,12 @@ body {
 }
 
 #index {
+    padding: 10px 10px 10px 10px;
     margin-bottom: 50px;
+    border-width: thin;
+    border-style: solid;
+    border-radius: 15px;
+    background-color: #f4f4f4;
 }
 
 .header {
@@ -63,4 +68,10 @@ footer .link {
 
 footer a:hover {
     text-decoration: underline;
+}
+
+article {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 0 0;
+    border-bottom: 2px solid black;
 }
