@@ -1,3 +1,16 @@
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
 header {
     margin-bottom: 50px;
 }
@@ -19,6 +32,7 @@ header {
 
 .header a:hover {
     color: #a0a0a0;
+    text-decoration: underline;
 }
 
 a.brand {
@@ -27,4 +41,23 @@ a.brand {
 
 .audio-links {
     font-size: 150%;
+}
+
+footer {
+    background-color: #24292e;
+    padding: 10px 20px 0px 20px;
+    flex-shrink: 0;
+    color: white;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+footer .link {
+    margin-left: 10px;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
