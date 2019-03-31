@@ -1,5 +1,8 @@
 <a class="brand" href="/">{{ .Site.Title }}</a>
-<a href="/index.xml">RSS</a>
+
+{{ with  .OutputFormats.Get "RSS" -}}
+<a href="{{ .Permalink }}">{{ .Name }}</a>
+{{- end }}
 
 {{ with .Site.Params.patreon }}
     <a href="{{ . }}">Patreon</a>
