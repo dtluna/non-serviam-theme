@@ -1,1 +1,1 @@
-<title>{{ .Page.Title }} — {{ .Site.Title }}</title>
+<title>{{ if eq .Page.Title  $.Site.Title }}{{ $.Site.Title }}{{ else }}{{ .Page.Title }} — {{ $.Site.Title }}{{ end }}</title>
