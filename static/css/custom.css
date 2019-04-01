@@ -80,3 +80,9 @@ article {
     padding: 10px 0 0 0;
     border-bottom: 2px solid black;
 }
+
+.with-border-top {
+    border-top: 2px solid black;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
