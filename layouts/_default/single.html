@@ -10,10 +10,10 @@
         </div>
     </div>
 
-    {{ if or (eq .Params.enable_mouthful true) (eq $.Site.Params.enable_mouthful true) }}
+    {{ if or (eq .Params.enable_commento true) (eq $.Site.Params.enable_commento true) }}
     <div class="row with-border-top">
         <div class="column">
-            {{ partial "mouthful.html" . }}
+           {{ partial "commento.html" . }}
         </div>
     </div>
     {{ end }}

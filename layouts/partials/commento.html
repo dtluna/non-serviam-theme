@@ -1,0 +1,20 @@
+{{ with $.Site.Params.commento_url }}
+<h3>Comments</h3>
+<div id="commento"></div>
+<script src="{{ . }}/js/commento.js"></script>
+<noscript>
+    <p>
+        You need to enable JavaScript to read and leave comments.
+    </p>
+    <p>
+        Comments are powered by free software called
+        <a href="https://gitlab.com/commento/">Commento</a>
+        so you're not being tracked by Disqus.
+    </p>
+</noscript>
+{{ else }}
+<h5>
+    You have included the <code>commento.html</code> partial but haven't configured
+    <code>commento_url</code> param in your Hugo config.
+</h5>
+{{ end }}
