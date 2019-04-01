@@ -6,11 +6,11 @@
     </header>
     <p>{{ partial "post-meta.html" . }}</p>
 
-    {{ with .Params.description }}
+    <p>{{ with .Params.description }}
         {{ . }}
     {{ else }}
         {{ .Summary }}
-    {{ end }}
+    {{ end }}</p>
 
     {{ if .Truncated }}
         <nav class="readmore"><p>
@@ -24,5 +24,4 @@
     {{ with .Params.images }}
         <meta itemprop="image" content="{{ index . 0 }}">
     {{ end }}
-
 </article>
