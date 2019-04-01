@@ -1,6 +1,6 @@
 <a class="brand" href="/">{{ .Site.Title }}</a>
 
-{{ with  .OutputFormats.Get "RSS" -}}
+{{ with  $.Site.Home.OutputFormats.Get "RSS" -}}
 <a href="{{ .Permalink }}">{{ .Name }}</a>
 {{- end }}
 
