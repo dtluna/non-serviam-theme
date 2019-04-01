@@ -48,6 +48,11 @@ a.brand {
     font-size: 150%;
 }
 
+.brand img {
+    padding-top: 15px;
+    width: 30px;
+}
+
 .audio-links {
     font-size: 150%;
 }

@@ -1,4 +1,9 @@
-<a class="brand" href="/">{{ .Site.Title }}</a>
+<a class="brand" href="/">
+    {{ with $.Site.Params.brand_image }}
+    <img src="{{ . }}" />
+    {{ end }}
+    <span>{{ .Site.Title }}</span>
+</a>
 
 {{ with  $.Site.Home.OutputFormats.Get "RSS" -}}
 <a href="{{ .Permalink }}">{{ .Name }}</a>
