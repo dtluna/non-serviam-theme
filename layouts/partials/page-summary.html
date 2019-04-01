@@ -4,6 +4,7 @@
             <a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a>
         </h3>
     </header>
+    <p>{{ partial "post-meta.html" . }}</p>
 
     {{ with .Params.description }}
         {{ . }}
