@@ -5,7 +5,7 @@
      xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
 >
     <channel>
-        <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+        {{ partial "title.html" . }}
 
         <link>{{ .Permalink }}</link>
 
@@ -70,6 +70,7 @@
         <itunes:explicit>{{ if $.Site.Params.explicit }}yes{{ else }}no{{ end }}</itunes:explicit>
 
         {{ range .Pages }}
+        {{ $page := . }}
         <item>
             <title>{{ .Title }}</title>
             <link>{{ .Permalink }}</link>
@@ -84,7 +85,7 @@
             {{ end }}
 
             <content:encoded>{{ .Content | html }}</content:encoded>
-            {{ if ne $.Site.Params.hide_author true }}
+            {{ if ne (.Param "hide_author") true }}
                 {{ with .Params.author }}
                     <dc:creator>{{ . }}</dc:creator>
                     <itunes:author>{{ . }}</itunes:author>
@@ -96,21 +97,23 @@
                 {{ end }}
             {{ end }}
 
-            {{ if or (eq .Params.explicit true) (eq $.Site.Params.explicit true) }}
+            {{ if .Param "explicit" }}
                 <itunes:explicit>yes</itunes:explicit>
             {{ else }}
                 <itunes:explicit>no</itunes:explicit>
             {{ end }}
 
-            {{ if .Params.opusURL }}
-                {{ $stat := os.Stat (path.Join "static" .Params.opusURL) }}
-                <enclosure url="{{ .Params.opusURL | absURL }}" length="{{ $stat.Size }}" type="audio/ogg" />
-            {{ else if .Params.oggURL }}
-                <enclosure url="{{ .Params.oggURL | absURL }}" type="audio/ogg" />
-            {{ else if .Params.mp3URL }}
-                <enclosure url="{{ .Params.mp3URL | absURL }}" type="audio/mpeg" />
-            {{ else if .Params.m4aURL }}
-                <enclosure url="{{ .Params.mp3URL | absURL }}" type="audio/mpeg" />
+            {{ range $.Site.Params.audio_links }}
+                {{ $audioFile := $page.Param .param_name }}
+                {{ if $audioFile }}
+                    {{ if .type }}
+                    {{ $path := path.Join "static" $audioFile }}
+                        {{ if fileExists $path }}
+                            {{ $stat := os.Stat $path }}
+                            <enclosure url="{{ $audioFile | absURL }}" size="{{ $stat.Size }}" type="{{ .type }}" />
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
             {{ end }}
         </item>
         {{ end }}

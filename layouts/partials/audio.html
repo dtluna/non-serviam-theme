@@ -1,14 +1,22 @@
 <div>
-    {{ if or (or (isset .Params "opusurl") (isset .Params "oggurl")) (or (isset .Params "mp3url") (isset .Params "m4aurl"))}}
+{{ $haslink := false }}
+{{ range $.Site.Params.audio_links }}
+    {{ if $.Param .param_name }}
+        {{ if .type }}
+            {{ $haslink = true }}
+        {{ end }}
+    {{ end }}
+{{ end }}
+
+{{ if $haslink }}
 <audio controls>
-    {{ if .Params.opusURL }}
-    <source src="{{ .Params.opusURL }}" type="audio/ogg">
-    {{ else if .Params.oggURL }}
-    <source src="{{ .Params.oggURL }}" type="audio/ogg">
-    {{ else if .Params.mp3URL }}
-    <source src="{{ .Params.mp3URL }}" type="audio/mpeg">
-    {{ else if .Params.m4aURL }}
-    <source src="{{ .Params.m4aURL }}" type="audio/mpeg">
+    {{ range $.Site.Params.audio_links }}
+        {{ $audioFile := $.Param .param_name }}
+        {{ if $audioFile }}
+            {{ if .type }}
+                <source src="{{ $audioFile }}" type="{{ .type }}">
+            {{ end }}
+        {{ end }}
     {{ end }}
 </audio>
 {{ end }}
@@ -16,9 +24,10 @@
 
 <span>Downloads:</span>
 <ul>
-    {{ range $.Site.Params.download_links }}
-        {{ if $.Param .param_name }}
-        <li><a href={{ $.Param .param_name }} download><i class="fas fa-download">{{ .label }}</i></a></li>
+    {{ range $.Site.Params.audio_links }}
+        {{ $audioFile := $.Param .param_name }}
+        {{ if $audioFile }}
+        <li><a href={{ $audioFile }} download><i class="fas fa-download">{{ .label }}</i></a></li>
         {{ end }}
     {{ end }}
 </ul>

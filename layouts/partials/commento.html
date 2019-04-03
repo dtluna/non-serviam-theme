@@ -1,4 +1,4 @@
-{{ with $.Site.Params.commento_url }}
+{{ with .Param "commento_url" }}
 <h3>Comments</h3>
 <div id="commento"></div>
 <script src="{{ . }}/js/commento.js"></script>

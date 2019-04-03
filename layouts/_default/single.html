@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    {{ if or (eq .Params.enable_commento true) (eq $.Site.Params.enable_commento true) }}
+    {{ if .Param "enable_commento" }}
     <div class="row with-border-top">
         <div class="column">
            {{ partial "commento.html" . }}
