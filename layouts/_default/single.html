@@ -1,23 +1,23 @@
-{{ define "main" }}
+{{- define "main" -}}
 <div class="container">
     <div class="row">
         <div class="column">
-            <h1>{{ .Title }}</h1>
-            <p>{{ partial "post-meta.html" . }}</p>
+            <h1>{{- .Title -}}</h1>
+            <p>{{- partial "post-meta.html" . -}}</p>
             <div class="audio-links">
-                {{ partial "audio.html" . }}
+                {{- partial "audio.html" . -}}
             </div>
-            {{ .Content }}
+            {{- .Content -}}
         </div>
     </div>
 
-    {{ if .Param "enable_commento" }}
+    {{- if .Param "enable_commento" -}}
     <div class="row with-border-top">
         <div class="column">
-           {{ partial "commento.html" . }}
+           {{- partial "commento.html" . -}}
         </div>
     </div>
-    {{ end }}
+    {{- end -}}
 </div>
 
-{{ end }}
+{{- end -}}

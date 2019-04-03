@@ -5,118 +5,74 @@
      xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
 >
     <channel>
-        {{ partial "title.html" . }}
+        {{- partial "title.html" . -}}
 
-        <link>{{ .Permalink }}</link>
+        <link>{{- .Permalink -}}</link>
 
-        {{ with $.Site.Params.description }}
-        <description>{{ . }}</description>
-        <itunes:subtitle>{{ . }}</itunes:subtitle>
-        {{ end }}
-
+        {{- with $.Site.Params.description -}}
+        <description>{{- . -}}</description>
+        <itunes:subtitle>{{- . -}}</itunes:subtitle>
+        {{- end -}}
 
         <generator>Hugo — gohugo.io</generator>
-        {{ with .Site.LanguageCode }} <language>{{.}}</language>{{end}}
+        {{- with .Site.LanguageCode -}}
+        <language>{{.}}</language>
+        {{- end -}}
 
-        {{ with .Site.Author.email }}
-        <itunes:owner>
-            <itunes:email>{{ . }}</itunes:email>
-            {{ with $.Site.Params.podcast_name }}
-            <itunes:name>{{ . }}
-            {{ end }}
-        </itunes:owner>
-        <managingEditor>{{.}}
-            {{ with $.Site.Author.name }} ({{.}}){{end}}
-        </managingEditor>
-        {{end}}
+        {{- with .Site.Author.email -}}
+            <itunes:owner>
+                <itunes:email>{{ . }}</itunes:email>
+                {{- with $.Site.Params.podcast_name -}}
+                    <itunes:name>{{ . }}
+                {{- end -}}
+            </itunes:owner>
+            <managingEditor>{{.}}
+                {{ with $.Site.Author.name }} ({{.}}){{end}}
+            </managingEditor>
+        {{- end -}}
 
-        {{ with $.Site.Author.name }}
-        <itunes:author>{{ . }}</itunes:author>
-        {{ end }}
+        {{- with $.Site.Author.name -}}
+            <itunes:author>{{ . }}</itunes:author>
+        {{- end -}}
 
-        {{ with .Site.Author.email }}
+        {{- with .Site.Author.email -}}
         <webMaster>{{.}}
             {{ with $.Site.Author.name }} ({{.}}){{end}}
         </webMaster>
-        {{end}}
+        {{- end -}}
 
-        {{ with .Site.Copyright }}
+        {{- with .Site.Copyright -}}
         <copyright>{{.}}</copyright>
-        {{end}}
+        {{- end -}}
 
-        {{ if not .Date.IsZero }}
+        {{- if not .Date.IsZero -}}
             <lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>
-        {{ end }}
+        {{- end -}}
 
-        {{ with .OutputFormats.Get "RSS" }}
+        {{- with .OutputFormats.Get "RSS" -}}
             {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
-        {{ end }}
+        {{- end -}}
 
-        {{ if $.Param "images" }}
-            {{ range first 6 ($.Param "images") }}
+        {{- if $.Param "images" -}}
+            {{- range first 6 ($.Param "images") -}}
                 <image>
-                    <title>{{ if eq  $.Title  $.Site.Title }}{{ $.Site.Title }}{{ else }}{{ with $.Title }}{{.}} on {{ end }}{{ $.Site.Title }}{{ end }}</title>
+                   {{- partial "title.html" -}}
                     <link>{{ $.Permalink }}</link>
                     <url>{{ . | absURL }}</url>
                 </image>
                 <itunes:image href="{{ . | absURL }}" />
-            {{ end }}
-        {{ end }}
+            {{- end -}}
+        {{- end -}}
 
-        {{ with $.Site.Params.category }}
+        {{- with $.Site.Params.category -}}
             <itunes:category text="{{ . | html }}" />
-        {{ end }}
+        {{- end -}}
 
         <itunes:explicit>{{ if $.Site.Params.explicit }}yes{{ else }}no{{ end }}</itunes:explicit>
 
-        {{ range .Pages }}
-        {{ $page := . }}
-        <item>
-            <title>{{ .Title }}</title>
-            <link>{{ .Permalink }}</link>
-
-            <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
-            {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
-            <guid>{{ .Permalink }}</guid>
-
-            {{ with .Summary }}
-                <itunes:summary>{{ . | html }}</itunes:summary>
-                <description>{{ . | html }}</description>
-            {{ end }}
-
-            <content:encoded>{{ .Content | html }}</content:encoded>
-            {{ if ne (.Param "hide_author") true }}
-                {{ with .Params.author }}
-                    <dc:creator>{{ . }}</dc:creator>
-                    <itunes:author>{{ . }}</itunes:author>
-                {{ else }}
-                    {{ with $.Site.Author.name }}
-                        <dc:creator>{{ . }}</dc:creator>
-                        <itunes:author>{{ . }}</itunes:author>
-                    {{ end }}
-                {{ end }}
-            {{ end }}
-
-            {{ if .Param "explicit" }}
-                <itunes:explicit>yes</itunes:explicit>
-            {{ else }}
-                <itunes:explicit>no</itunes:explicit>
-            {{ end }}
-
-            {{ range $.Site.Params.audio_links }}
-                {{ $audioFile := $page.Param .param_name }}
-                {{ if $audioFile }}
-                    {{ if .type }}
-                    {{ $path := path.Join "static" $audioFile }}
-                        {{ if fileExists $path }}
-                            {{ $stat := os.Stat $path }}
-                            <enclosure url="{{ $audioFile | absURL }}" size="{{ $stat.Size }}" type="{{ .type }}" />
-                        {{ end }}
-                    {{ end }}
-                {{ end }}
-            {{ end }}
-        </item>
-        {{ end }}
+        {{- range .Pages -}}
+            {{- partial "rss/item.xml" . -}}
+        {{- end -}}
     </channel>
 </rss>
 

@@ -1,0 +1,45 @@
+<item>
+    <title>{{- .Title -}}</title>
+    <link>{{- .Permalink -}}</link>
+
+    <pubDate>{{- .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML -}}</pubDate>
+    {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
+    <guid>{{ .Permalink }}</guid>
+
+    {{- with .Summary -}}
+        <itunes:summary>{{ . | html }}</itunes:summary>
+        <description>{{ . | html }}</description>
+    {{- end -}}
+
+    <content:encoded>{{ .Content | html }}</content:encoded>
+    {{- if ne (.Param "hide_author") true -}}
+        {{- with .Params.author -}}
+            <dc:creator>{{ . }}</dc:creator>
+            <itunes:author>{{ . }}</itunes:author>
+        {{- else -}}
+            {{- with $.Site.Author.name -}}
+                <dc:creator>{{ . }}</dc:creator>
+                <itunes:author>{{ . }}</itunes:author>
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+
+    {{- if .Param "explicit" -}}
+        <itunes:explicit>yes</itunes:explicit>
+    {{- else -}}
+        <itunes:explicit>no</itunes:explicit>
+    {{- end -}}
+
+    {{- range $.Site.Params.audio_links -}}
+        {{- $audioFile := $.Param .param_name -}}
+        {{- if $audioFile -}}
+            {{- if .type -}}
+            {{ $path := path.Join "static" $audioFile }}
+                {{- if fileExists $path -}}
+                    {{ $stat := os.Stat $path }}
+                    <enclosure url="{{ $audioFile | absURL }}" size="{{ $stat.Size }}" type="{{ .type }}" />
+                {{- end -}}
+            {{- end -}}
+        {{- end -}}
+    {{- end -}}
+</item>

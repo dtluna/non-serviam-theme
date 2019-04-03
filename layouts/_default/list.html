@@ -1,13 +1,13 @@
-{{ define "main" }}
+{{- define "main" -}}
 <div class="container">
     <div class="row">
         <div class="column">
             <header>
-                <h1>{{ .Title }}</h1>
+                <h1>{{- .Title -}}</h1>
             </header>
-            {{ partial "podcast-list.html" . }}
+            {{- partial "podcast-list.html" . -}}
         </div>
     </div>
 </div>
-{{ end }}
+{{- end -}}
 
