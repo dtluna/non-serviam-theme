@@ -1,0 +1,12 @@
+{{ $images := .Param "images" }}
+{{ $context := . }}
+{{- if $images -}}
+    {{- range first 6 $images -}}
+    <image>
+        {{- partial "title.html" $context -}}
+        <link>{{ $.Permalink }}</link>
+        <url>{{ . | absURL }}</url>
+    </image>
+    <itunes:image href="{{ . | absURL }}" />
+    {{- end -}}
+{{- end -}}

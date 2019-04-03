@@ -53,16 +53,7 @@
             {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
         {{- end -}}
 
-        {{- if $.Param "images" -}}
-            {{- range first 6 ($.Param "images") -}}
-                <image>
-                   {{- partial "title.html" -}}
-                    <link>{{ $.Permalink }}</link>
-                    <url>{{ . | absURL }}</url>
-                </image>
-                <itunes:image href="{{ . | absURL }}" />
-            {{- end -}}
-        {{- end -}}
+        {{- partial "rss/image.xml" . -}}
 
         {{- with $.Site.Params.category -}}
             <itunes:category text="{{ . | html }}" />

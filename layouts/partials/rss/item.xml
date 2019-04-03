@@ -30,6 +30,8 @@
         <itunes:explicit>no</itunes:explicit>
     {{- end -}}
 
+    {{- partial "rss/image.xml" . }}
+
     {{- range $.Site.Params.audio_links -}}
         {{- $audioFile := $.Param .param_name -}}
         {{- if $audioFile -}}
