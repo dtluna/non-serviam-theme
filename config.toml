@@ -1,0 +1,8 @@
+[params]
+download_links = [
+{type = "audio/ogg", label = "Opus audio", param_name = "opusURL",},
+{type = "audio/ogg", label = "OGG audio", param_name = "oggURL",},
+{type = "audio/mpeg", label = "MP3 audio", param_name = "mp3URL",},
+{type = "audio/mpeg", label = "M4A audio", param_name = "m4aURL",},
+{label = "Torrent file", param_name = "torrent",},
+]
