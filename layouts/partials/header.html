@@ -6,7 +6,7 @@
 </a>
 
 {{ with  $.Site.Home.OutputFormats.Get "RSS" -}}
-<a href="{{ .Permalink | relURL }}"><i class="fas fa-rss-square"></i>{{ .Name }}</a>
+<a href="{{ .Permalink | relURL }}" download><i class="fas fa-rss-square"></i>{{ .Name }}</a>
 {{- end }}
 
 {{ with $.Site.Params.patreon }}
