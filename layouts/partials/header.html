@@ -6,21 +6,21 @@
 </a>
 
 {{ with  $.Site.Home.OutputFormats.Get "RSS" -}}
-<a href="{{ .Permalink }}">{{ .Name }}</a>
+<a href="{{ .Permalink }}"><i class="fas fa-rss-square"></i>{{ .Name }}</a>
 {{- end }}
 
 {{ with .Site.Params.patreon }}
-    <a href="{{ . }}">Patreon</a>
+<a href="{{ . }}"><i class="fab fa-patreon"></i>Patreon</a>
 {{ end }}
 
 {{ with .Site.Params.stitcher }}
-    <a href="{{ . }}">Stitcher</a>
+<a href="{{ . }}">Stitcher</a>
 {{ end }}
 
 {{ with .Site.Params.soundcloud }}
-    <a href="{{ . }}">Soundcloud</a>
+<a href="{{ . }}"><i class="fab fa-soundcloud"></i>Soundcloud</a>
 {{ end }}
 
 {{ with .Site.Params.youtube }}
-    <a href="{{ . }}">YouTube</a>
+<a href="{{ . }}"><i class="fab fa-youtube"></i>YouTube</a>
 {{ end }}
