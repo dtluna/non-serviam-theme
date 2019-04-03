@@ -5,7 +5,12 @@
         <div class="header">
             {{- partial "header.html" . -}}
         </div>
-        <main>{{- block "main" . }}{{- end }}</main>
+        {{- with .Param "banner" -}}
+            {{- partial "banner.html" . -}}
+        {{- end -}}
+        <div class="container">
+            <main>{{- block "main" . }}{{- end }}</main>
+        </div>
         <footer>
             {{- partial "footer.html" . -}}
         </footer>

@@ -1,5 +1,4 @@
 {{- define "main" -}}
-<div class="container">
     <div class="row">
         <div class="column">
             <h1>{{- .Title -}}</h1>
@@ -14,10 +13,8 @@
     {{- if .Param "enable_commento" -}}
     <div class="row with-border-top">
         <div class="column">
-           {{- partial "commento.html" . -}}
+            {{- partial "commento.html" . -}}
         </div>
     </div>
     {{- end -}}
-</div>
-
 {{- end -}}

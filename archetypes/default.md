@@ -16,4 +16,5 @@ opusURL = ""
 mp3URL = ""
 torrentFile = ""
 
+banner = ""
 +++
