@@ -3,10 +3,19 @@
         <div class="column">
             <h1>{{- .Title -}}</h1>
             <p>{{- partial "post-meta.html" . -}}</p>
+            <p>
+                Tags: {{- partial "tags.html" . -}}
+            </p>
             <div class="audio-links">
                 {{- partial "audio.html" . -}}
             </div>
             {{- .Content -}}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="column">
+            {{- partial "related-content.html" . -}}
         </div>
     </div>
 
