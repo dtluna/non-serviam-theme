@@ -1,21 +1,25 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <ul class="navbar-nav">
-        <li class="nav-item">
-            <span class="navbar-text">Powered by</span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://gohugo.io/">Hugo</a>
-        </li>
-        <li class="nav-item">
-            <span class="navbar-text">and</span>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="https://git.dtluna.net/nsm/non-serviam-theme">the Non Serviam theme</a>
-        </li>
+<footer class="pt-4 my-md-5 pt-md-5 border-top">
+    <div class="row">
+        <div class="col-md border-right">
+            <h5>Powered by</h5>
+            <ul class="list-unstyled">
+                <li>
+                    <a href="https://gohugo.io/">Hugo</a>
+                </li>
+                <li>
+                    <a href="https://git.dtluna.net/nsm/non-serviam-theme">Non Serviam theme</a>
+                </li>
+                <li>
+                    <a href="https://getbootstrap.com">Bootstrap</a>
+                </li>
+            </ul>
+        </div>
+
         {{- with $.Site.Params.source -}}
-        <li class="nav-item">
-            <a class="nav-link" href="{{ . }}">Source code</a>
-        </li>
+        <div class="col-md">
+            <h5><a class="text-big" href="{{ . }}">Website source code</a></h5>
+        </div>
         {{- end -}}
-    </ul>
-</nav>
+
+    </div>
+</footer>
