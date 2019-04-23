@@ -1,33 +1,36 @@
-<div>
-{{ $haslink := false }}
-{{ range $.Site.Params.audio_links }}
-    {{ if $.Param .param_name }}
-        {{ if .type }}
-            {{ $haslink = true }}
-        {{ end }}
-    {{ end }}
-{{ end }}
-
-{{ if $haslink }}
-<audio controls>
-    {{ range $.Site.Params.audio_links }}
-        {{ $audioFile := $.Param .param_name }}
-        {{ if $audioFile }}
-            {{ if .type }}
-                <source src="{{ $audioFile }}" type="{{ .type }}">
+<div class="row">
+    <div class="col">
+        {{ $haslink := false }}
+        {{ range $.Site.Params.audio_links }}
+            {{ if $.Param .param_name }}
+                {{ if .type }}
+                    {{ $haslink = true }}
+                {{ end }}
             {{ end }}
         {{ end }}
-    {{ end }}
-</audio>
-{{ end }}
-</div>
 
-<span>Downloads:</span>
-<ul>
-    {{ range $.Site.Params.audio_links }}
-        {{ $audioFile := $.Param .param_name }}
-        {{ if $audioFile }}
-        <li><a href={{ $audioFile }} download><i class="fas fa-download">{{ .label }}</i></a></li>
+        {{ if $haslink }}
+        <h4><i class="fas fa-podcast"></i> Listen to audio:</h4>
+        <audio class="w-100" controls>
+            {{ range $.Site.Params.audio_links }}
+                {{ $audioFile := $.Param .param_name }}
+                {{ if $audioFile }}
+                    {{ if .type }}
+                        <source src="{{ $audioFile }}" type="{{ .type }}">
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+        </audio>
         {{ end }}
-    {{ end }}
-</ul>
+
+        <h4><i class="fas fa-download"></i> Downloads:</h4>
+        <p>
+            {{ range $.Site.Params.audio_links }}
+                {{ $audioFile := $.Param .param_name }}
+                {{ if $audioFile }}
+                <a href={{ $audioFile }} download><i class="fas fa-download"></i> {{ .label }}</a>
+                {{ end }}
+            {{ end }}
+        </p>
+    </div>
+</div>

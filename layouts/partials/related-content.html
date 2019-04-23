@@ -2,7 +2,7 @@
 {{ $related := .Site.RegularPages.Related . | first $num_to_show }}
 {{- with $related -}}
 <aside>
-    <h4>Related Content</h4>
+    <h4><i class="fas fa-paperclip"></i> Related Content</h4>
     <ul>
         {{- range . -}}
         <li><a href="{{ .RelPermalink }}">{{ .Title }}</a>

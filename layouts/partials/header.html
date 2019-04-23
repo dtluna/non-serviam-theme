@@ -1,26 +1,65 @@
-<a class="brand" href="/">
-    {{ with $.Site.Params.brand_image }}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">
+    {{- with $.Site.Params.brand_image -}}
     <img src="{{ . }}" />
-    {{ end }}
-    <span>{{ $.Site.Title }}</span>
-</a>
+    {{- else -}}
+    {{ $.Site.Title }}
+    {{- end -}}
+    </a>
 
-{{ with  $.Site.Home.OutputFormats.Get "RSS" -}}
-<a href="{{ .Permalink | relURL }}" download><i class="fas fa-rss-square"></i>{{ .Name }}</a>
-{{- end }}
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-{{ with $.Site.Params.patreon }}
-<a href="{{ . }}"><i class="fab fa-patreon"></i>Patreon</a>
-{{ end }}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            {{- with  $.Site.Home.OutputFormats.Get "RSS" -}}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ .Permalink | relURL }}" download>
+                    <i class="fas fa-rss-square"></i>
+                    <span>{{ .Name }}</span>
+                </a>
+            </li>
+            {{- end -}}
 
-{{ with $.Site.Params.stitcher }}
-<a href="{{ . }}">Stitcher</a>
-{{ end }}
+            {{- with $.Site.Params.patreon -}}
+            <li>
+                <a class="nav-link" href="{{ . }}">
+                    <i class="fab fa-patreon"></i>
+                    <span>Patreon</span>
+                </a>
+            </li>
+            {{- end -}}
 
-{{ with $.Site.Params.soundcloud }}
-<a href="{{ . }}"><i class="fab fa-soundcloud"></i>Soundcloud</a>
-{{ end }}
+            {{- with $.Site.Params.stitcher -}}
+            <li>
+                <a class="nav-link" href="{{ . }}">
+                    <span>Stitcher</span>
+                </a>
+            </li>
+            {{- end -}}
 
-{{ with $.Site.Params.youtube }}
-<a href="{{ . }}"><i class="fab fa-youtube"></i>YouTube</a>
-{{ end }}
+            {{- with $.Site.Params.soundcloud -}}
+            <li>
+                <a class="nav-link" href="{{ . }}">
+                    <i class="fab fa-soundcloud"></i>
+                    <span>Soundcloud</span>
+                </a>
+            </li>
+            {{- end -}}
+
+            {{- with $.Site.Params.youtube -}}
+            <li>
+                <a class="nav-link" href="{{ . }}">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+            </li>
+            {{- end -}}
+        </ul>
+    </div>
+</nav>
+
+
+
+

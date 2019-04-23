@@ -1,9 +1,7 @@
 {{- define "main" -}}
 <div class="row">
-    <div class="column">
-        <header>
-            <h1>{{- .Title -}}</h1>
-        </header>
+    <div class="col">
+        <h1>{{- .Title -}}</h1>
         {{- partial "podcast-list.html" . -}}
     </div>
 </div>

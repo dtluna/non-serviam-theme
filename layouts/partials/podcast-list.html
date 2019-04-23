@@ -1,5 +1,10 @@
-{{ range .Paginator.Pages }}
-    {{ partial "page-summary.html" . }}
-{{ end }}
-
-{{ partial "pagination.html" . }}
+<ul class="list-group list-group-flush">
+    {{- range .Paginator.Pages -}}
+    <li class="list-group-item">
+        {{- partial "page-summary.html" . -}}
+    </li>
+{{- end -}}
+</ul>
+<div class="d-flex justify-content-center">
+    {{ template "_internal/pagination.html" . }}
+</div>

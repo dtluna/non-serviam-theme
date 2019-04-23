@@ -2,17 +2,18 @@
 <html>
     {{- partial "head.html" . -}}
     <body>
-        <div class="header">
-            {{- partial "header.html" . -}}
-        </div>
-        {{- with .Param "banner" -}}
-            {{- partial "banner.html" . -}}
-        {{- end -}}
+        {{- partial "header.html" . -}}
         <div class="container">
-            <main>{{- block "main" . }}{{- end }}</main>
+            {{- with .Param "banner" -}}
+                {{- partial "banner.html" . -}}
+            {{- end -}}
+            <main>{{- block "main" . -}}{{- end -}}</main>
         </div>
         <footer>
             {{- partial "footer.html" . -}}
         </footer>
+
+        <script src="/js/jquery-3.4.0.slim.min.js"></script>
+        <script src="/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

@@ -1,27 +1,29 @@
 {{- define "main" -}}
     <div class="row">
-        <div class="column">
+        <div class="col-sm">
             <h1>{{- .Title -}}</h1>
             <p>{{- partial "post-meta.html" . -}}</p>
             <p>
-                Tags: {{- partial "tags.html" . -}}
+                {{- partial "tags.html" . -}}
             </p>
-            <div class="audio-links">
-                {{- partial "audio.html" . -}}
+            {{- partial "audio.html" . -}}
+            <div class="row">
+                <div class="col">
+                    {{- .Content -}}
+                </div>
             </div>
-            {{- .Content -}}
         </div>
     </div>
 
     <div class="row">
-        <div class="column">
+        <div class="col-sm">
             {{- partial "related-content.html" . -}}
         </div>
     </div>
 
     {{- if .Param "enable_commento" -}}
-    <div class="row with-border-top">
-        <div class="column">
+    <div class="row">
+        <div class="col-sm">
             {{- partial "commento.html" . -}}
         </div>
     </div>

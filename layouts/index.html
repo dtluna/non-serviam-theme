@@ -1,13 +1,14 @@
 {{- define "main" -}}
     {{- with .Site.Params.description -}}
-        <div class="row" id="index">
-            <div class="column">
-                <h5 id="index-description">{{ . }}</h5>
-            </div>
+    <div class="jumbotron jumbotron-fluid">
+        <div class="container container-fluid">
+            <h1 class="display-4">Non Serviam Media</h1>
+            <p class="lead">{{ . }}</p>
         </div>
+    </div>
     {{- end -}}
     <div class="row">
-        <div class="column">
+        <div class="col-sm">
             {{- partial "podcast-list.html" . -}}
         </div>
     </div>
