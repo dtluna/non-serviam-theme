@@ -1,0 +1,38 @@
+{{- define "main" -}}
+    <div class="row">
+        <div class="col">
+            <h1>{{- .Title -}}</h1>
+            <p>{{- partial "post-meta.html" . -}}</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            {{- partial "audio.html" . -}}
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col">
+            {{- .Content -}}
+        </div>
+    </div>
+    <div class="row mb-4 border-bottom">
+        <div class="col">
+            {{- partial "tags.html" . -}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            {{- partial "downloads.html" . -}}
+        </div>
+        <div class="col-md-6">
+            {{- partial "related-content.html" . -}}
+        </div>
+    </div>
+    {{- if .Param "enable_commento" -}}
+    <div class="row">
+        <div class="col">
+            {{- partial "commento.html" . -}}
+        </div>
+    </div>
+    {{- end -}}
+{{- end -}}
