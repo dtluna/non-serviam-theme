@@ -8,7 +8,7 @@
 {{ end }}
 
 {{ if $haslink }}
-<h4><i class="fas fa-podcast"></i> Listen to audio</h4>
+<p class="h4"><i class="fas fa-podcast"></i> Listen to audio</p>
 <audio class="w-100" controls>
     {{ range $.Site.Params.audio_links }}
         {{ $audioFile := $.Param .param_name }}
