@@ -2,7 +2,6 @@
 title = "{{ replace .Name "-" " " | title }}"
 date = {{ .Date }}
 draft = true
-description = "Add your description here"
 tags = ["non", "serviam"]
 images = [
   "https://source.unsplash.com/collection/983219/1600x900"
