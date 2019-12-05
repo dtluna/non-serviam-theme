@@ -61,7 +61,7 @@
 
         <itunes:explicit>{{ if $.Site.Params.explicit }}yes{{ else }}no{{ end }}</itunes:explicit>
 
-        {{- range $.Site.Pages -}}
+        {{- range $.Site.RegularPages -}}
             {{- partial "rss/item.xml" . -}}
         {{- end -}}
     </channel>
